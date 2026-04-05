@@ -1,0 +1,26 @@
+{
+  "manifest_version": 3,
+  "name": "DESTROYER — TV Signal Injector",
+  "version": "1.0.0",
+  "description": "Auto-scrapes TradingView chart data and pushes to your VPS for AI analysis.",
+  "permissions": ["activeTab", "storage", "alarms", "scripting"],
+  "host_permissions": ["https://www.tradingview.com/*", "http://*/*", "https://*/*"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.tradingview.com/chart/*", "https://www.tradingview.com/tv-symbol-change/*"],
+      "js": ["injector.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
